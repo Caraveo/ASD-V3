@@ -1,12 +1,12 @@
 /* 
 Michelle M. Pessoa
-ASD 1207
-Due: 12 July 2012 
+ASD 1209
+Due: 4 October 2012 
 .JS Document
 
-GH-PAGES: http://mmpessoa.github.com/ASD-V2/Week2/
-GITHUB: https://github.com/mmpessoa/ASD-V2/tree/gh-pages/Week2
-GIT READ-ONLY: https://github.com/mmpessoa/ASD-V2.git
+GH-PAGES: http://mmpessoa.github.com/ASD-V2/Week3/
+GITHUB: https://github.com/mmpessoa/ASD-V2/tree/gh-pages/Week3
+GIT READ-ONLY: https://github.com/mmpessoa/ASD-V3.git
 
 
 
