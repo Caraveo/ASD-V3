@@ -40,6 +40,29 @@ $(document).ready(function(){
 
 
 
+
+
+
+
+
+
+// This function deletes a single item from Local Storage and reloads the page.
+
+function deleteItem(id) {
+    var ask = confirm("Are you sure you want to delete this entry? This cannot be undone.");
+    if (ask) {
+        localStorage.removeItem(id);
+        alert("Entry was deleted!");
+        window.location.reload();
+    } else {
+        alert("Entry was NOT deleted.");
+    }
+}
+
+
+
+
+
 // This function clears all data and reloads the page.
 
 function clearLocal() {
