@@ -1,6 +1,6 @@
 /* 
 Michelle M. Pessoa
-ASD 1209
+ASD 1210
 Due: 27 September 2012 
 .JS Document
 */
@@ -37,3 +37,23 @@ $(document).ready(function(){
 	});
 	
 });
+
+
+
+// This function clears all data and reloads the page.
+
+function clearLocal() {
+    if (localStorage.length === 0) {
+        alert("There is no data to clear.");
+    } else {
+        var caution = confirm ("This action will erase all of your sightings. This cannot be undone.");
+            if (caution){
+                localStorage.clear();
+                alert("All sightings have been deleted.");
+                window.location.reload();
+                return false;  
+            } else {
+               alert("Delete has been canceled. Your sightings have been retained."); 
+            }
+    }
+}
