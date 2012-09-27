@@ -12,7 +12,12 @@ var parseCryptidForm = function(data){
 };
 
 
-$(document).ready(function(){
+//$(document).ready(function(){
+// Use pageInit instead
+
+$("#home").on('pageinit', function(){
+
+//Code needed for homepage goes in this function.
 	
 	var rcform = $('#recordcryptidform'),
 		rcerrorslink = $('#rcerrorslink')
