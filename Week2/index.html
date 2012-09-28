@@ -12,8 +12,22 @@
 <!-- Some artwork and icons purchased from Shutterstock.com -->
 <!-- Some icons by Glyphish. http://www.glyphish.com -->
 
-        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />
+<!--  Mobile viewport optimized: j.mp/bplateviewport -->
+<meta name="HandheldFriendly" content="True" />
+<meta name="MobileOptimized" content="320"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- Mobile IE needs ClearType for smoothing fonts -->
+<meta http-equiv="cleartype" content="on" />
+
+<!-- StyleSheets under here -->
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />
+<link rel="stylesheet" href="css/jquery.ui.datepicker.mobile.css" />
 <link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
+
+<!-- JavaScript is normally at the end of the body, except for Modernizr which enables HTML5 elements & feature detects -->
+<script src="js/libs/modernizr.custom.min.js"></script>
+
     </head>
     <body>
     
@@ -70,18 +84,18 @@
     <p>Have you seen something unusual? Tell us all about it!</p>
     <form action="" method="post" id="recordcryptidform">
       <div data-role="fieldcontain">
-        <label for="reporternamefirst">First Name</label>
-        <input type="text" name="reporternamefirst" id="reporternamefirst" class="required"/>
-        <label for="reporternamelast">Last Name</label>
-        <input type="text" name="reporternamelast" id="reporternamelast" class="required"/>
-        <label for="reporteremail">Email</label>
-        <input type="text" name="reporteremail" id="reporteremail" class="required email"/>
+        <label for="reporternamefirst">First Name:</label>
+        <input type="text" name="reporternamefirst" id="reporternamefirst" class="required" placeholder="Jane"/>
+        <label for="reporternamelast">Last Name:</label>
+        <input type="text" name="reporternamelast" id="reporternamelast" class="required" placeholder="Doe"/>
+        <label for="reporteremail">Email:</label>
+        <input type="text" name="reporteremail" id="reporteremail" class="required email"  placeholder="you@me.com"/>
       </div>
       <div data-role="fieldcontain">
-        <label for="sightingdate">Date</label>
-        <input type="text" name="sightingdate" id="sightingdate" class="required date"/>
-        <label for="cryptidlocation">Location</label>
-        <input type="text" name="cryptidlocation" id="cryptidlocation" class="required"/>
+        <label for="sightingdate">Date:</label>
+        <input type="date" name="sightingdate" id="sightingdate" class="required date" placeholder="MM/DD/YYYY"/>
+        <label for="cryptidlocation">Location:</label>
+        <input type="text" name="cryptidlocation" id="cryptidlocation" class="required" placeholder="Anytown, USA"/>
       </div>
       <div data-role="fieldcontain">
         <label for="cryptidnumber">If multiple beings were seen, how many?</label>
@@ -99,25 +113,21 @@
         </fieldset>
       </div>
       <div data-role="fieldcontain">
-        <label for="cryptid-sighting">Which cryptid did you see?</label>
-        <select name="cryptid-sighting" id="cryptid-sighting" data-native-menu="false" class="required" />
+        <label for="cryptid-type">Which cryptid did you see?</label>
+        <select name="cryptid-type" id="cryptid-type" data-native-menu="false" class="required" />
         
         <option data-placeholder="true" value>- Choose a Cryptid-</option>
-        <!--<optgroup label="Label 1">-->
         <option value="alien">Alien</option>
         <option value="bigfoot">Bigfoot</option>
         <option value="chupacabra">Chupacabra</option>
-        <!--</optgroup>--> 
-        <!--<optgroup label="Label 2"> -->
         <option value="dinosaur">Dinosaur</option>
         <option value="fairy">Fairy</option>
         <option value="ghost">Ghost</option>
-        <option value="mothmn">Mothman</option>
+        <option value="mothman">Mothman</option>
         <option value="seamonster">Sea Monster</option>
         <option value="vampire">Vampire</option>
         <option value="werewolf">Werewolf</option>
         <option value="other">Other</option>
-        <!--</optgroup> -->
         </select>
       </div>
       <div data-role="fieldcontain">
@@ -126,33 +136,51 @@
 Please describe the sighting in as much detail as possible.
 			</textarea>
       </div>
-      <div data-role="fieldcontain">
-        <label for="cryptidnews">Would you like to subscribe to our free email newsletter, <em>Tales from the Cryptids?</em></label>
-        <select data-role="slider" name="cryptidnews" id="cryptidnews">
-          <option value="off">No</option>
-          <option value="on">Yes</option>
-        </select>
-      </div>
-      <div data-role="fieldcontain">
-        <div class="ui-grid-a">
-          <div class="ui-block-a">
-            <input type="submit" value="Submit" data-theme="b" />
-          </div>
-          <div class="ui-block-b">
-            <input type="reset" value="Reset" data-theme="a" />
-          </div>
-        </div>
-      </div>
+
+      
+<!--Checkbox newsletter request -->
+                    <div data-role="fieldcontain">
+                        <fieldset data-role="controlgroup">
+                               <legend>Would you like to subscribe to our free email newsletter, <em>Tales from the Cryptids?</em></legend>
+                               <input type="checkbox" name="checkbox-news" id="checkbox-news" data-mini="true" checked="checked" class="required"/>
+                               <label for="checkbox-news">Yes</label>
+                        </fieldset>
+                    </div>
+
+<!--Entry editing buttons -->
+
+                    
+			  <div data role="fieldcontain" id="addSighting">
+			    <input type="submit" value="Add Sighting" id="submit" data-theme="b">    
+			  </div>
+
+			  <div data role="fieldcontain" id="editButton" style="display: none;">
+			    <input type="button" id="editSighting" value="Edit Sighting"  data-theme="e"> 
+			  </div>
+
+
+			  <div data role="fieldcontain">
+			    <input type="reset" value="Reset Form" id="reset" data-theme="a">    
+			  </div>
+
+
+      
       <a href="#recordcryptiderrors" id="rcerrorslink" data-rel="dialog" data-transition="pop">Open Errors</a>
     </form>
     
     
 <!-- Button group for showing local storage -->
     
-	<div data-role="controlgroup" data-type="horizontal"> <a href="#" data-role="button" data-theme="e" id="show">Show recent sightings</a> <a href="#" data-role="button" data-theme="e" id="clear">Clear local storage</a>
+	<div data-role="controlgroup" data-type="horizontal"> 
+	<a href="#" data-role="button" data-theme="e" id="showData">Show recent sightings</a> 
+	<a href="#" data-role="button" data-theme="e" onclick="clearLocal(); location.reload();" id="clearLocal">Clear local storage</a>
     </div>
     
-    
+<!-- Local storage will be loaded into this div -->
+		<div id="localStorageContainer">
+		</div>
+		
+		    
   </div>
   <div data-role="footer" data-position="fixed" data-id="foot">
     <div data-role="navbar">
@@ -164,9 +192,6 @@ Please describe the sighting in as much detail as possible.
     </div></div>
   </div>
 </div>
-
-
-
 
 
 
@@ -217,7 +242,7 @@ Please describe the sighting in as much detail as possible.
       </div>
       <div data-role="collapsible" data-collapsed="true">
         <h3> Werewolves </h3>
-        <p><em>"WEREWOLF, n. A wolf that was once, or is sometimes, a man. All werewolves are of evil disposition, having assumed a bestial form to gratify a beastial appetite, but some, transformed by sorcery, are as humane as is consistent with an acquired taste for human flesh."</em> <strong>- Ambrose Bierce (1842 - 1914),</strong> <em>The Devil's Dictionary</em></p>
+        <p><em>"WEREWOLF, n. A wolf that was once, or is sometimes, a man. All werewolves are of evil disposition, having assumed a bestial form to gratify a bestial appetite, but some, transformed by sorcery, are as humane as is consistent with an acquired taste for human flesh."</em> <strong>- Ambrose Bierce (1842 - 1914),</strong> <em>The Devil's Dictionary</em></p>
       </div>
       <div data-role="collapsible" data-collapsed="true">
         <h3> Everything Else </h3>
@@ -262,9 +287,14 @@ Please describe the sighting in as much detail as possible.
         
 <!-- JavaScript links   -->     
         
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-        <script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
-        <script type="text/javascript" src="js/main.js"></script> 
-        <script type="text/javascript" src="js/getexternal.js"></script>
-    </div></body>
+<!-- <script src="http://code.jquery.com/jquery-1.8.0.min.js"></script> -->
+<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
+<script type="text/javascript" src="js/libs/jquery.validate.min.js"></script> 
+<script src="js/libs/jQuery.ui.datepicker.js"></script>
+<script src="js/libs/jquery.ui.datepicker.mobile.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" src="js/getexternal.js"></script>
+    </div>
+    </body>
 </html>
