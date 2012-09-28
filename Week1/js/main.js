@@ -6,19 +6,16 @@ Due: 27 September 2012
 */
 
 
-var parseCryptidForm = function(data){
-	// uses form data here;
-	console.log(data);
-};
 
 
-//$(document).ready(function(){
+/* $(document).ready(function(){ */
 // Use pageInit instead
 
 $("#home").on('pageinit', function(){
 
 //Code needed for homepage goes in this function.
 	
+/*
 	var rcform = $('#recordcryptidform'),
 		rcerrorslink = $('#rcerrorslink')
 	;	
@@ -40,7 +37,101 @@ $("#home").on('pageinit', function(){
 			parseCryptidForm(data); 
 		}
 	});
+*/
 	
+});
+
+
+
+/////////////////////////////////////////////////////////////
+
+$("#additem").on('pageinit', function(){
+
+//Code needed for Add Item Page goes in this function.
+
+
+$('#submit').on('click', function saveSighting(id) {
+    //Declare form variables, generate a key to create unique ID.    
+    var dt = new Date();
+    var key =  (dt.getTime());
+        var reporternamefirst =  $('#reporternamefirst').val();
+        var reporternamelast =  $('#reporternamelast').val();
+        var reporteremail =  $('#reporteremail').val();
+        var sightingdate =  $('#sightingdate').val();
+        var cryptidlocation =  $('#cryptidlocation').val();
+        var cryptidnumber =  $('#cryptidnumber').val();
+        var cryptid-gender =  $('#cryptid-gender').val();
+        var cryptid-type =  $('#cryptid-type').val();
+        var encounter =  $('#encounter').val();
+        var checkbox;
+        if ($('#checkbox-news').is(":checked")){
+		checkbox = "Subscriber"
+		}else{
+		checkbox = "Non-Subscriber"
+		};
+
+//Create variable to load the data into Local Storage as a string
+
+    var cryptEntry = [reporternamefirst, reporternamelast, reporteremail, sightingdate, cryptidlocation, cryptidnumber, cryptid-gender, cryptid-type, encounter, checkbox];
+
+//Add data to Local Storage giving a key and string
+    localStorage.setItem(key, cryptEntry);
+
+//Reload page to load new form. Alert user that data was added.
+    location.reload();
+    alert("Your sighting has been logged.");
+});	
+
+//Toggle form on/off to display Local Storage data.
+function toggleCtrl(t) {
+    switch (t) {
+    case "on":
+        $('#recordcryptidform').css('display', 'none');
+        break;
+    case "off":
+        $('#recordcryptidform').css('display', 'block');
+        break;
+    default:
+        return false;
+    }
+}
+
+//Load Local Storage data. 
+
+$('#showData').on('click', function getData() {
+	toggleCtrl("on"); 
+    var getData = $('#localStorageContainer')[0];
+    
+//For loop pulls key and string and separates by commas.
+    for (var i = 0, j = localStorage.length; i < j; i++) {
+        var key = localStorage.key(i);
+        var value = localStorage.getItem(key);
+        value = value.split(',');
+        
+//Generate HTML to display Local Storage data
+        
+        $('<div>').attr({'class': 'cryptDiv'}).appendTo('#localStorageContainer');
+
+//Load images
+        $('<img>').attr({'src': 'images/' + value[0] + '.png'}).appendTo('. cryptDiv');
+
+        $('<p>').html('First Name: ' + value[0]).appendTo('. cryptDiv');
+        $('<p>').html('Last Name: ' + value[1]).appendTo('. cryptDiv');
+        $('<p>').html('Email: ' + value[2]).appendTo('. cryptDiv');
+        $('<p>').html('Date of Sighting: ' + value[3]).appendTo('. cryptDiv');
+        $('<p>').html('Location of Sighting: ' + value[4]).appendTo('. cryptDiv');
+        $('<p>').html('Number Seen: ' + value[5]).appendTo('. cryptDiv');        
+        $('<p>').html('Gender: ' + value[6]).appendTo('. cryptDiv');
+        $('<p>').html('Type of Being: ' + value[7]).appendTo('. cryptDiv');
+        $('<p>').html('Encounter Description: ' + value[8]).appendTo('. cryptDiv');
+        $('<p>').html('Subscribe to Newsletter? ' + value[9]).appendTo('. cryptDiv');
+        
+
+//Add Edit and Delete links
+        $('<p>').html($('<a>').attr({'href': '#','onclick': 'deleteItem(' + key + ');'}).html('Delete Sighting')).appendTo('. cryptDiv');
+        $('<p>').html($('<a>').attr({'href': '#','onclick': 'editItem(' + key + ');'}).html('Edit Sighting')).appendTo('. cryptDiv');
+        $('<br>').html('').appendTo('. cryptDiv');
+    }
 });
 
 
@@ -164,3 +255,42 @@ function clearLocal() {
             }
     }
 }
+
+
+//// Validation function doesn't work anymore.
+
+
+
+var parseCryptidForm = function(data){
+	// uses form data here;
+	console.log(data);
+};
+
+///
+
+	var rcform = $('#recordcryptidform'),
+		rcerrorslink = $('#rcerrorslink')
+	;	
+	
+	rcform.validate({
+		invalidHandler: function(form, validator){
+			rcerrorslink.click();
+			var html = '';
+			for (var key in validator.submitted){
+				var label = $('label[for^="'+ key +'"]').not('[generated]');
+				var legend = label.closest('fieldset').find('.ui-controlgroup-label');
+				var fieldName = legend.length ? legend.text() : label.text();
+				html += '<li>'+ fieldName +'</li>';
+			};
+			$("#recordcryptiderrors ul").html(html);
+		},
+		submitHandler: function(){
+			var data = rcform.serializeArray();
+			parseCryptidForm(data); 
+		}
+	});
+
+
+//End of Add Item page.
+
+});
