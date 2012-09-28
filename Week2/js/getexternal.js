@@ -1,4 +1,7 @@
-$(document).ready(function(){
+/* $(document).ready(function(){ */
+// Use pageInit instead
+
+$("#home").on('pageinit', function(){
 	$('#jsonbutton').on('click', function(){
 		console.log("json button");
 		
