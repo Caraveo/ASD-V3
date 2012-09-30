@@ -257,7 +257,7 @@ function clearLocal() {
 }
 
 
-//// Validation function doesn't work anymore.
+//// Validation function below doesn't work anymore.
 
 
 
